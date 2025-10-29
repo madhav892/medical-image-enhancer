@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medical Image Enhancer - CLAHE Algorithm</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="header">
+        <div class="header-content">
+            <h1>Medical Image Enhancer</h1>
+            <p class="subtitle">CLAHE-Based Image Enhancement for Medical Diagnostics</p>
+        </div>
+    </div>
+    
+    <div class="container">
+        <div class="info-section">
+            <div class="info-card">
+                <span class="icon">▲</span>
+                <h3>Upload Image</h3>
+                <p>Select X-ray, CT scan, or MRI</p>
+            </div>
+            <div class="info-card">
+                <span class="icon">●</span>
+                <h3>Enhance</h3>
+                <p>Apply CLAHE algorithm</p>
+            </div>
+            <div class="info-card">
+                <span class="icon">✓</span>
+                <h3>Compare</h3>
+                <p>View side-by-side results</p>
+            </div>
+        </div>
+
+        <div class="upload-section">
+            <input type="file" id="image-upload" accept="image/*">
+            <label for="image-upload" class="upload-btn">
+                <span class="upload-icon">+</span>
+                <span class="upload-text">Choose Medical Image</span>
+                <span class="upload-hint">Supports JPG, PNG, DICOM formats</span>
+            </label>
+        </div>
+
+        <div class="controls-section">
+            <div class="control-group">
+                <label for="algorithm-select">Enhancement Algorithm:</label>
+                <select id="algorithm-select" class="algorithm-select">
+                    <option value="clahe">CLAHE (Contrast Limited Adaptive Histogram Equalization)</option>
+                    <option value="histogram">Standard Histogram Equalization</option>
+                    <option value="unsharp">Unsharp Masking (Edge Enhancement)</option>
+                    <option value="bilateral">Bilateral Filter + CLAHE</option>
+                    <option value="morphological">Morphological Enhancement</option>
+                    <option value="gamma">Gamma Correction</option>
+                </select>
+            </div>
+            
+            <div class="control-group" id="clahe-params">
+                <label for="clip-limit">CLAHE Clip Limit: <span id="clip-value">2.0</span></label>
+                <input type="range" id="clip-limit" min="1" max="5" step="0.1" value="2.0" class="slider">
+                
+                <label for="tile-size">Tile Size: <span id="tile-value">8</span></label>
+                <input type="range" id="tile-size" min="4" max="16" step="2" value="8" class="slider">
+            </div>
+        </div>
+
+        <div class="image-display" id="image-display">
+            <div class="image-wrapper">
+                <div class="image-header">
+                    <h2>Original Image</h2>
+                    <span class="badge">Input</span>
+                </div>
+                <div class="image-container">
+                    <img id="original-image" src="" alt="Original Image">
+                    <div class="placeholder" id="original-placeholder">
+                        <span class="placeholder-icon">■</span>
+                        <p>No image uploaded</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="divider">
+                <div class="arrow">→</div>
+            </div>
+            
+            <div class="image-wrapper">
+                <div class="image-header">
+                    <h2>Enhanced Image</h2>
+                    <span class="badge enhanced">Output</span>
+                </div>
+                <div class="image-container">
+                    <img id="enhanced-image" src="" alt="Enhanced Image">
+                    <div class="placeholder" id="enhanced-placeholder">
+                        <span class="placeholder-icon">○</span>
+                        <p>Waiting for enhancement</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="action-section">
+            <button id="enhance-btn" class="action-btn" disabled>
+                <span class="btn-icon">▶</span>
+                <span class="btn-text">Enhance Image</span>
+            </button>
+            <button id="download-btn" class="download-btn" disabled>
+                <span class="btn-icon">↓</span>
+                <span class="btn-text">Download Enhanced Image</span>
+            </button>
+        </div>
+
+        <div class="metrics-section" id="metrics-section" style="display: none;">
+            <h3>Image Quality Metrics</h3>
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <h4>Contrast</h4>
+                    <div class="metric-values">
+                        <div class="metric-item">
+                            <span class="metric-label">Original:</span>
+                            <span class="metric-value" id="contrast-original">-</span>
+                        </div>
+                        <div class="metric-item">
+                            <span class="metric-label">Enhanced:</span>
+                            <span class="metric-value" id="contrast-enhanced">-</span>
+                        </div>
+                        <div class="metric-improvement" id="contrast-improvement">-</div>
+                    </div>
+                </div>
+                
+                <div class="metric-card">
+                    <h4>Sharpness</h4>
+                    <div class="metric-values">
+                        <div class="metric-item">
+                            <span class="metric-label">Original:</span>
+                            <span class="metric-value" id="sharpness-original">-</span>
+                        </div>
+                        <div class="metric-item">
+                            <span class="metric-label">Enhanced:</span>
+                            <span class="metric-value" id="sharpness-enhanced">-</span>
+                        </div>
+                        <div class="metric-improvement" id="sharpness-improvement">-</div>
+                    </div>
+                </div>
+                
+                <div class="metric-card">
+                    <h4>Entropy (Information)</h4>
+                    <div class="metric-values">
+                        <div class="metric-item">
+                            <span class="metric-label">Original:</span>
+                            <span class="metric-value" id="entropy-original">-</span>
+                        </div>
+                        <div class="metric-item">
+                            <span class="metric-label">Enhanced:</span>
+                            <span class="metric-value" id="entropy-enhanced">-</span>
+                        </div>
+                        <div class="metric-improvement" id="entropy-improvement">-</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="algorithm-info">
+            <h3>About Enhancement Algorithms</h3>
+            <div class="algorithm-descriptions">
+                <div class="algo-item">
+                    <strong>CLAHE:</strong> Divides image into tiles, applies histogram equalization with contrast limiting. Best for medical images.
+                </div>
+                <div class="algo-item">
+                    <strong>Histogram Equalization:</strong> Spreads pixel intensity values across full range. Fast but can amplify noise.
+                </div>
+                <div class="algo-item">
+                    <strong>Unsharp Masking:</strong> Subtracts blurred version to enhance edges. Great for improving sharpness.
+                </div>
+                <div class="algo-item">
+                    <strong>Bilateral Filter:</strong> Smooths image while preserving edges, then applies CLAHE. Reduces noise effectively.
+                </div>
+                <div class="algo-item">
+                    <strong>Morphological:</strong> Uses top-hat transform to enhance bright features. Good for specific structures.
+                </div>
+                <div class="algo-item">
+                    <strong>Gamma Correction:</strong> Adjusts brightness using power-law transform. Simple and effective for exposure issues.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>Digital Image Processing Project | Built with OpenCV & Flask</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
