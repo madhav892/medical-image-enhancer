@@ -1,8 +1,7 @@
 {
   "$schema": "https://railway.app/railway.schema.json",
   "build": {
-    "builder": "NIXPACKS",
-    "buildCommand": "pip install -r medical_image_enhancer/requirements.txt"
+    "builder": "NIXPACKS"
   },
   "deploy": {
     "startCommand": "cd medical_image_enhancer && gunicorn app:app --bind 0.0.0.0:$PORT",
