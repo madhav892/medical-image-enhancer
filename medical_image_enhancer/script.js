@@ -13,6 +13,11 @@ const tileValue = document.getElementById('tile-value');
 const metricsSection = document.getElementById('metrics-section');
 const claheParams = document.getElementById('clahe-params');
 
+// API endpoint configuration
+const API_URL = window.location.hostname === 'localhost' 
+    ? 'http://127.0.0.1:5000' 
+    : window.location.origin;
+
 let uploadedImage = null;
 let enhancedImageData = null;
 
@@ -127,7 +132,7 @@ enhanceBtn.addEventListener('click', () => {
             tileSize: parseInt(tileSize.value)
         };
         
-        fetch('http://127.0.0.1:5000/enhance', {
+        fetch(`${API_URL}/enhance`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
