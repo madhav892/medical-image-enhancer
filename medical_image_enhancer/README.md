@@ -1,4 +1,4 @@
-# Medical Image Enhancer - DIP Project
+# Medical Image Enhancer
 
 A professional web-based medical image enhancement tool using multiple digital image processing algorithms with real-time quality metrics.
 
@@ -84,8 +84,6 @@ Measures information content and histogram distribution
 - Flask (Web framework)
 - OpenCV (Image processing)
 - NumPy (Numerical operations)
-- scikit-image (Advanced image processing)
-- SciPy (Scientific computing)
 
 ## 📦 Installation & Setup
 
@@ -120,9 +118,9 @@ Open `index.html` in your web browser
 5. **View Metrics**: See quantitative improvements in contrast, sharpness, entropy
 6. **Download**: Save the enhanced image
 
-## 🎓 Academic Concepts Demonstrated
+## 🔬 Technical Concepts
 
-### Digital Image Processing Concepts:
+### Digital Image Processing Techniques:
 1. **Spatial Domain Processing** (point operations)
 2. **Histogram Processing** (equalization, specification)
 3. **Spatial Filtering** (blurring, sharpening)
@@ -130,33 +128,12 @@ Open `index.html` in your web browser
 5. **Adaptive Processing** (CLAHE with tiling)
 6. **Image Quality Assessment** (contrast, sharpness, entropy metrics)
 
-### Advanced Topics:
+### Advanced Features:
 - Contrast limiting to prevent noise amplification
 - Bilinear interpolation at tile boundaries
 - Edge-preserving filtering (bilateral)
 - Multi-scale image analysis
 - Quantitative image quality metrics
-
-## 📊 Why This Project is Advanced
-
-1. **Multiple Algorithms**: Not just CLAHE, but 6 different approaches
-2. **Quantitative Metrics**: Numerical proof of enhancement (not just visual)
-3. **Adjustable Parameters**: Real-time algorithm tuning
-4. **Professional UI**: Production-ready interface
-5. **Full Stack Implementation**: Frontend + Backend integration
-6. **Medical Focus**: Specifically designed for diagnostic imaging
-7. **Download Functionality**: Practical usability feature
-
-## 🔍 Comparison with Basic Projects
-
-| Feature | Basic Project | This Project |
-|---------|--------------|--------------|
-| Algorithms | 1 (CLAHE only) | **6 different algorithms** |
-| Metrics | None | **3 quantitative metrics** |
-| Parameters | Fixed | **Adjustable in real-time** |
-| UI | Simple HTML | **Professional medical theme** |
-| Download | No | **Yes, with proper filename** |
-| Documentation | Minimal | **Complete with formulas** |
 
 ## 📁 Project Structure
 
@@ -171,16 +148,6 @@ medical_image_enhancer/
 └── images/              # Sample medical images (optional)
 ```
 
-## 🎯 For Faculty Evaluation
-
-This project demonstrates:
-- Deep understanding of image enhancement concepts
-- Implementation of multiple algorithms with mathematical basis
-- Quantitative evaluation of enhancement quality
-- Full-stack development skills
-- Professional presentation and documentation
-- Practical application in medical domain
-
 ## 📚 References
 
 1. Zuiderveld, K. (1994). "Contrast Limited Adaptive Histogram Equalization"
@@ -188,15 +155,6 @@ This project demonstrates:
 3. Gonzalez, R. C., & Woods, R. E. "Digital Image Processing" (4th Edition)
 4. OpenCV Documentation: https://docs.opencv.org/
 
-## 👨‍💻 Author
-
-Digital Image Processing Course Project
-Medical Image Enhancement System
-
-## 📄 License
-
-Educational Use - DIP Course Project
-
 ---
 
-**Note**: This system is for educational purposes. For clinical use, additional validation and regulatory approval would be required.
+**Note**: This system is for educational and research purposes. For clinical use, additional validation and regulatory approval would be required.
