@@ -1,22 +1,13 @@
-from flask import Flask, request, jsonify, send_from_directory
+from flask import Flask, request, jsonify
 from flask_cors import CORS
 import cv2
 import numpy as np
 import base64
 from PIL import Image
 import io
-import os
 
-app = Flask(__name__, static_folder='.')
+app = Flask(__name__)
 CORS(app)
-
-@app.route('/')
-def index():
-    return send_from_directory('.', 'index.html')
-
-@app.route('/<path:path>')
-def serve_static(path):
-    return send_from_directory('.', path)
 
 def calculate_metrics(original, enhanced):
     """Calculate image quality metrics"""
@@ -160,6 +151,4 @@ def enhance_image():
         return jsonify({'error': str(e)}), 500
 
 if __name__ == '__main__':
-    import os
-    port = int(os.environ.get('PORT', 5000))
-    app.run(host='0.0.0.0', port=port, debug=False)
+    app.run(debug=True)
